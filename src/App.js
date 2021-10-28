@@ -1,26 +1,61 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Switch, BrowserRouter as Router,} from "react-router-dom";
+
+import RouteWithSubRoutes from "./RouteWithSubRoutes";
 
 import BasicLayout from "./Layout/BasicLayout";
 import AdminLayout from "./Layout/AdminLayout";
 import AuthLayout from "./Layout/AuthLayout";
 
+import Blog from "./Page/Admin/Blog";
+import Category from "./Page/Admin/Category";
+
+import Home from "./Page/Basic/Home"
+
+
+const routes = [
+  {
+    path: "/basic",
+    component: BasicLayout,
+    routes:[
+      {
+        path: "",
+        component: Home
+      }
+    ]
+  },
+  {
+    path: "/admin",
+    component: AdminLayout,
+    routes: [
+      {
+        path: "/admin/blog",
+        component: Blog
+      },
+      {
+        path: "/admin/category",
+        component: Category
+      }
+      
+    ]
+  },
+  {
+    path: "/auth",
+    component: AuthLayout
+  }
+];
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <BrowserRouter>
+        Welcome
+        <Router>
           <Switch>
-            <Route exact path="/">
-                <BasicLayout />
-            </Route>
-            <Route exact path="/admin">
-                <AdminLayout />
-            </Route>
-            <Route exact path="/auth">
-                <AuthLayout />
-            </Route>
+            {routes.map((route, i) => (
+              <RouteWithSubRoutes key={i} {...route} />
+            ))}
           </Switch>
-        </BrowserRouter>
+        </Router>
       </header>
     </div>
   );

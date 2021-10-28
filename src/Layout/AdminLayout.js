@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Blog from "../Page/Admin/Blog"
+import React from 'react';
+import {Switch} from "react-router-dom";
+import RouteWithSubRoutes from '../RouteWithSubRoutes';
 
-class AdminLayout extends Component{
-    render() {
-        return (
-            <div>
-                <BrowserRouter>
-                    <Switch>
-                        <Route exact path="dashboard">
-                            <Blog />
-                        </Route>
-                    </Switch>
-                </BrowserRouter>
-            </div>
-        );
-    }
+import Sidebar from '../Components/Sidebar';
+import HeadBar from '../Components/HeadBar';
+
+
+function AdminLayout ({routes}){
+    return (
+        <div>
+            <HeadBar />
+            <Sidebar />
+            <Switch>
+                {routes.map((route, i) => (
+                <RouteWithSubRoutes key={i} {...route} />
+                ))}
+            </Switch>
+        </div>
+    )
 }
 
 export default AdminLayout;

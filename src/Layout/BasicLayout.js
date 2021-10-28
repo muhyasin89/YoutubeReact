@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Switch } from "react-router-dom";
+import RouteWithSubRoutes from '../RouteWithSubRoutes';
 
-class BasicLayout extends Component{
-    render() {
-        return (
-            <div>
-                Basic Layout
-            </div>
-        );
-    }
+function BasicLayout ({routes}){
+    return (
+        <div>
+            <Switch>
+                {routes.map((route, i) => (
+                <RouteWithSubRoutes key={i} {...route} />
+                ))}
+            </Switch>
+        </div>
+    )
 }
 
 export default BasicLayout;

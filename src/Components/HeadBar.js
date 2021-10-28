@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Sidebar extends Component {
-   
+class HeadBar extends Component {
+
     render() {
         return (
             <div>
-                Sidebar
+                HeadBar
             </div>
         );
     }
 }
 
 
-export default Sidebar;
+export default HeadBar;
