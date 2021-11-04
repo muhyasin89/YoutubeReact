@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch} from "react-router-dom";
+import {Routes} from "react-router";
 import RouteWithSubRoutes from '../RouteWithSubRoutes';
 
 import Sidebar from '../Components/Sidebar';
@@ -9,13 +9,13 @@ import HeadBar from '../Components/HeadBar';
 function AdminLayout ({routes}){
     return (
         <div>
-            <HeadBar />
+            <HeadBar props={true} />
             <Sidebar />
-            <Switch>
+            <Routes>
                 {routes.map((route, i) => (
                 <RouteWithSubRoutes key={i} {...route} />
                 ))}
-            </Switch>
+            </Routes>
         </div>
     )
 }

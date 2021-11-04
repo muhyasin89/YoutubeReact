@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import {BiMenu} from "react-icons/bi";
 
-class HeadBar extends Component {
 
-    render() {
-        return (
-            <div>
-                HeadBar
-            </div>
-        );
-    }
+export default function HeadBar() {
+    
+    return (
+        <>
+            <h1>HeadBar</h1>
+            <BiMenu />
+        </>
+    );
 }
-
-
-export default HeadBar;
