@@ -10,7 +10,6 @@ import Blog from "./Page/Admin/Blog";
 import Category from "./Page/Admin/Category";
 
 import Home from "./Page/Basic/Home"
-import HeadBar from "./Components/HeadBar";
 
 
 
