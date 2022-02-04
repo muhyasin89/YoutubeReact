@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Switch} from "react-router-dom";
 
 import RouteWithSubRoutes from "./RouteWithSubRoutes";
 
@@ -53,11 +53,11 @@ function App() {
       <header className="App-header">
         <h1 className="text-gray-400">Welcome </h1>
         <Router>
-          <Routes>
+          <Switch>
             {routes.map((route, i) => (
               <RouteWithSubRoutes key={i} {...route} />
             ))}
-          </Routes>
+          </Switch>
         </Router>
       </header>
     </div>

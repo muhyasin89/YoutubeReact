@@ -1,15 +1,15 @@
 import React from 'react';
-import {Routes } from "react-router-dom";
+import {Switch } from "react-router-dom";
 import RouteWithSubRoutes from '../RouteWithSubRoutes';
 
 function BasicLayout ({routes}){
     return (
         <div>
-            <Routes>
+            <Switch>
                 {routes.map((route, i) => (
                 <RouteWithSubRoutes key={i} {...route} />
                 ))}
-            </Routes>
+            </Switch>
         </div>
     )
 }
