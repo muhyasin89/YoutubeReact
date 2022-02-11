@@ -1,13 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Switch} from "react-router-dom";
+import RouteWithSubRoutes from '../RouteWithSubRoutes';
 
-class AuthLayout extends Component{
-    render() {
-        return (
-            <div>
-                Auth Layout
-            </div>
-        );
-    }
+import Sidebar from '../Components/Sidebar';
+import HeadBar from '../Components/HeadBar';
+
+
+function AuthLayout ({routes}){
+    return (
+        <div>
+            <HeadBar props={true} />
+            <Sidebar />
+            <h1>This is Auth Layout</h1>
+            <Switch>
+                {routes.map((route, i) => (
+                <RouteWithSubRoutes key={i} {...route} />
+                ))}
+            </Switch>
+        </div>
+    )
 }
 
 export default AuthLayout;
