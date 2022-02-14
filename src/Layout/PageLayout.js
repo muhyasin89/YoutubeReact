@@ -2,7 +2,7 @@ import React from 'react';
 import {Switch } from "react-router-dom";
 import RouteWithSubRoutes from '../RouteWithSubRoutes';
 
-function BasicLayout ({routes}){
+function PageLayout ({routes}){
     return (
         <div>
             <Switch>
@@ -14,4 +14,4 @@ function BasicLayout ({routes}){
     )
 }
 
-export default BasicLayout;
+export default PageLayout;

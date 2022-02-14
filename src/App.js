@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Switch} from "react-router-dom";
 
 import RouteWithSubRoutes from "./RouteWithSubRoutes";
 
-import BasicLayout from "./Layout/BasicLayout";
+import PageLayout from "./Layout/PageLayout";
 import AdminLayout from "./Layout/AdminLayout";
 import AuthLayout from "./Layout/AuthLayout";
 
@@ -11,16 +11,16 @@ import Category from "./Page/Admin/Category";
 import Quiz from "./Page/Admin/Quiz";
 
 import Home from "./Page/Basic/Home";
-import Login from "./Page/Auth/Login";
-import Register from "./Page/Auth/Register";
+import SignIn from "./Page/Auth/SignIn";
+import SignUp from "./Page/Auth/SignUp";
 
 
 
 
 const routes = [
   {
-    path: "/basic",
-    component: BasicLayout,
+    path: "/page",
+    component: PageLayout,
     routes:[
       {
         path: "",
@@ -51,12 +51,12 @@ const routes = [
     component: AuthLayout,
     routes: [
       {
-        path: "/auth/login",
-        component: Login
+        path: "/auth/signin",
+        component: SignIn
       },
       {
-        path: "/auth/register",
-        component: Register
+        path: "/auth/signup",
+        component: SignUp
       }
       
     ]
