@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
+import Login from './components/Login'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="flex justify-center">
       <h1 className="font-bold text-2xl text-blue-900">
-        React and Tailwind with Vitejs!
+        <Login />
       </h1>
     </div>
   )
