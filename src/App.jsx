@@ -1,16 +1,25 @@
-import { useState } from 'react'
-import './App.css'
-import Login from './components/Login'
+import { Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import Login from './features/auth/Login'
+import Dashboard from './page/Dashboard'
+import RequireAuth from './features/auth/RequiredAuth'
+import Welcome from './page/Welcome'
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="flex justify-center">
-      <h1 className="font-bold text-2xl text-blue-900">
-        <Login />
-      </h1>
-    </div>
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        {/* public routes */}
+        <Route index element={<Welcome />} />
+        <Route path="login" element={<Login/>} />
+
+        {/* protected routes */}
+        <Route element={<RequireAuth />}>
+          <Route path="dashboard" element={<Dashboard />} />
+        </Route>
+      </Route>
+    </Routes>
   )
 }
 

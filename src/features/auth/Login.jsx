@@ -1,9 +1,59 @@
+import { useRef, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import React from "react"
+import { useDispatch } from 'react-redux'
+import { setCredentials } from './authSlice'
+import { useLoginMutation } from './authApiSlice'
 
-function Login(){
-    return (
-        <section className="h-screen">
+const Login = () => {
+    const userRef = useRef()
+    const errRef = useRef()
+    const [user, setUser] = useState('')
+    const [pwd, setPwd] = useState('')
+    const [errMsg, setErrMsg] = useState('')
+    const navigate = useNavigate()
+
+    const [login, {isLoading}] = useLoginMutation()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        userRef.current.focus()
+    }, [])
+
+    useEffect(() =>{
+        setErrMsg('')
+    },[user, pwd])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try{
+            const userData = await login({user, pwd}).unwrap()
+            dispatch(setCredentials({...userData, user}))
+            setUser('')
+            setPwd('')
+            navigate('/dashboard')
+        }catch(err){
+            if(!err?.originalStatus){
+                setErrMsg('No Response');
+            }else if(err.originalStatus?.status === 400){
+                setErrMsg('Missing Username or Password');
+            }else if(err.originalStatus?.status === 401){
+                setErrMsg('Unauthorized')
+            }else{
+                setErrMsg('Login Failed')
+            }
+
+            errRef.current.focus();
+        }
+    }
+
+    const handleUserInput = (e) => setUser(e.target.value)
+
+    const handlePwdInput = (e) =>setPwd(e.target.value)
+
+  const content = isLoading ? <h1> Loading ... </h1> : (
+    <section className="h-screen">
             <div className="container px-6 py-12 h-full">
                 <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
                     <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
@@ -13,14 +63,19 @@ function Login(){
                         alt="Phone image"
                         />
                     </div>
+                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} >{errMsg}</p>
                     <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className="mb-6">
                                 <input
                                 type="text"
                                 className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="Email address"
-                                value={this.state.email}
+                                placeholder="Username"
+                                value={user}
+                                ref={userRef}
+                                onChange={handleUserInput}
+                                autoComplete="off"
+                                required
                                 />
                             </div>
 
@@ -30,7 +85,10 @@ function Login(){
                                 type="password"
                                 className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="Password"
-                                value={this.state.password}
+                                value={pwd}
+                                onChange={handlePwdInput}
+                                autoComplete="off"
+                                required
                                 />
                             </div>
 
@@ -80,7 +138,9 @@ function Login(){
                 </div>
             </div>    
         </section>
-    )
+  )
+
+  return content
 }
 
 export default Login
