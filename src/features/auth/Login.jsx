@@ -71,7 +71,6 @@ const Login = () => {
                   });
             }
 
-            errRef.current.focus();
         }
     }
 
