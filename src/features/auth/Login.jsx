@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
 import { useLoginMutation } from './authApiSlice'
+import { Audio } from  'react-loader-spinner'
 import swal from 'sweetalert'
 
 const Login = () => {
@@ -78,7 +79,15 @@ const Login = () => {
 
     const handlePwdInput = (e) =>setPwd(e.target.value)
 
-  const content = isLoading ? <h1> Loading ... </h1> : (
+  const content = isLoading ? <Audio
+  height = "80"
+  width = "80"
+  radius = "9"
+  color = 'green'
+  ariaLabel = 'three-dots-loading'     
+  wrapperStyle
+  wrapperClass
+/> : (
     <section className="h-screen">
             <div className="container px-6 py-12 h-full">
                 <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">

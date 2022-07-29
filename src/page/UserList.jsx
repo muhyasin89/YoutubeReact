@@ -1,5 +1,6 @@
 import { useGetUsersQuery } from "../features/users/userApiSlice";
 import {Link} from "react-router-dom"
+import { Audio } from  'react-loader-spinner'
 
 const UserList = () => {
     const {
@@ -12,7 +13,15 @@ const UserList = () => {
 
     let content
     if(isLoading){
-        content = "<p> Loading .... </p>"
+        content = <Audio
+        height = "80"
+        width = "80"
+        radius = "9"
+        color = 'green'
+        ariaLabel = 'three-dots-loading'     
+        wrapperStyle
+        wrapperClass
+      />
     }else if(isSuccess){
         content = (
             <section className="users">
