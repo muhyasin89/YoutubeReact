@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
 import { useLoginMutation } from './authApiSlice'
+import swal from 'sweetalert'
 
 const Login = () => {
     const userRef = useRef()
@@ -24,6 +25,8 @@ const Login = () => {
         setErrMsg('')
     },[user, pwd])
 
+    let errorTitle = "Opps Something Wrong"
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -35,13 +38,37 @@ const Login = () => {
             navigate('/dashboard')
         }catch(err){
             if(!err?.originalStatus){
-                setErrMsg('No Response');
+                // setErrMsg('No Response');
+                swal({
+                    title: errorTitle,
+                    text: "No Response",
+                    icon: "error",
+                    button: "close!",
+                  });
             }else if(err.originalStatus?.status === 400){
-                setErrMsg('Missing Username or Password');
+                //setErrMsg('Missing Username or Password');
+                swal({
+                    title: errorTitle,
+                    text: "Missing Username or Password",
+                    icon: "failed",
+                    button: "close!",
+                  });
             }else if(err.originalStatus?.status === 401){
-                setErrMsg('Unauthorized')
+                //setErrMsg('Unauthorized')
+                swal({
+                    title:errorTitle,
+                    text: "Unauthorized",
+                    icon: "failed",
+                    button: "close!",
+                  });
             }else{
-                setErrMsg('Login Failed')
+                // setErrMsg('Login Failed')
+                swal({
+                    title: errorTitle,
+                    text: "Login Failed",
+                    icon: "failed",
+                    button: "close!",
+                  });
             }
 
             errRef.current.focus();
@@ -63,7 +90,7 @@ const Login = () => {
                         alt="Phone image"
                         />
                     </div>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} >{errMsg}</p>
+                    
                     <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
                         <form onSubmit={handleSubmit}>
                             <div className="mb-6">
